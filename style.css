@@ -1368,3 +1368,111 @@ body::after {
         padding: 2rem 1.5rem;
     }
 }
+
+/* Mobile Color Enhancement - Make colors more vibrant on phones */
+@media (max-width: 768px) {
+    /* Enhance color saturation and brightness on mobile */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+    
+    /* Make accent colors more vibrant */
+    :root {
+        --accent-color: #ff5252;
+        --accent-glow: #ff5252;
+    }
+    
+    /* Enhance button colors */
+    .btn-primary {
+        background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
+        box-shadow: 0 10px 30px rgba(255, 82, 82, 0.4);
+    }
+    
+    .btn-primary:hover {
+        box-shadow: 0 15px 40px rgba(255, 82, 82, 0.6);
+    }
+    
+    /* Enhance gradient text */
+    .hero-title,
+    .section-title,
+    .page-header h1,
+    .about-text h2,
+    .developer-info h2 {
+        filter: brightness(1.1) saturate(1.2);
+    }
+    
+    /* Enhance feature cards and portfolio cards */
+    .feature-card:hover,
+    .portfolio-card:hover {
+        box-shadow: 0 20px 60px rgba(255, 107, 107, 0.4);
+        border-color: #ff5252;
+    }
+    
+    /* Enhance link cards */
+    .link-card:hover {
+        box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+    }
+    
+    .link-card.linkedin:hover {
+        box-shadow: 0 15px 40px rgba(0, 119, 181, 0.4);
+    }
+    
+    .link-card.github:hover {
+        box-shadow: 0 15px 40px rgba(51, 51, 51, 0.4);
+    }
+    
+    .link-card.email:hover {
+        box-shadow: 0 15px 40px rgba(234, 67, 53, 0.4);
+    }
+    
+    .link-card.instagram:hover {
+        box-shadow: 0 15px 40px rgba(228, 64, 95, 0.4);
+    }
+    
+    /* Enhance filter buttons */
+    .filter-btn.active,
+    .filter-btn:hover {
+        background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
+        box-shadow: 0 10px 30px rgba(255, 82, 82, 0.4);
+    }
+    
+    /* Enhance portfolio tags */
+    .portfolio-tag {
+        background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
+        box-shadow: 0 5px 15px rgba(255, 82, 82, 0.3);
+    }
+    
+    /* Enhance skill tags on hover */
+    .skill-tag:hover {
+        background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
+        box-shadow: 0 10px 30px rgba(255, 82, 82, 0.4);
+    }
+    
+    /* Enhance navbar logo */
+    .logo a {
+        filter: brightness(1.2) saturate(1.3);
+    }
+    
+    /* Enhance background gradients */
+    body::before {
+        background: 
+            radial-gradient(circle at 20% 50%, rgba(255, 82, 82, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(106, 90, 205, 0.15) 0%, transparent 50%),
+            linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    }
+    
+    /* Enhance hero section */
+    .hero::before {
+        background: 
+            radial-gradient(circle at center, rgba(255, 82, 82, 0.15) 0%, transparent 70%),
+            linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.8) 100%);
+    }
+    
+    /* Enhance page headers */
+    .page-header::before {
+        background: radial-gradient(circle at center, rgba(255, 82, 82, 0.15) 0%, transparent 70%);
+    }
+}
