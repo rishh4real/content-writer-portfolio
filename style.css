@@ -1171,9 +1171,9 @@ body::after {
     box-shadow: 0 15px 40px rgba(234, 67, 53, 0.3);
 }
 
-.link-card.twitter:hover {
-    border-color: #1da1f2;
-    box-shadow: 0 15px 40px rgba(29, 161, 242, 0.3);
+.link-card.instagram:hover {
+    border-color: #E4405F;
+    box-shadow: 0 15px 40px rgba(228, 64, 95, 0.3);
 }
 
 .link-icon {
