@@ -753,6 +753,9 @@ body::after {
 
 .portfolio-image {
     background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(106, 90, 205, 0.1) 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     height: 250px;
     display: flex;
     align-items: center;
@@ -761,6 +764,25 @@ body::after {
     border-bottom: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.7) 100%);
+    transition: background 0.5s ease;
+}
+
+.portfolio-card:hover .portfolio-image {
+    transform: scale(1.1);
+}
+
+.portfolio-card:hover .portfolio-image-overlay {
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.2) 0%, rgba(10, 10, 10, 0.6) 100%);
 }
 
 .portfolio-image::before {
@@ -770,8 +792,9 @@ body::after {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: left 0.5s;
+    z-index: 2;
 }
 
 .portfolio-card:hover .portfolio-image::before {
