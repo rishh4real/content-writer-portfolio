@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer | Content Writer Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">Content Writer</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="developer.html" class="active">Developer</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Developer Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About the Developer</h1>
+            <p>Get to know the person behind this portfolio</p>
+        </div>
+    </section>
+
+    <!-- Developer Content -->
+    <section class="developer-content">
+        <div class="container">
+            <div class="developer-main">
+                <div class="developer-image-section">
+                    <div class="developer-image-wrapper">
+                        <div class="developer-image">
+                            <img src="" alt="Developer Photo" id="developerPhoto">
+                            <div class="image-placeholder-text">
+                                <p>Your Photo Here</p>
+                                <small>Click to upload or replace image</small>
+                            </div>
+                        </div>
+                        <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+
+                <div class="developer-info">
+                    <h2>About Me</h2>
+                    <div class="about-me-content">
+                        <p>I'm a passionate developer and content creator who loves building beautiful, functional websites and crafting engaging content. With a keen eye for design and a passion for clean code, I bring creative ideas to life through modern web technologies.</p>
+                        <p>When I'm not coding or writing, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.</p>
+                    </div>
+
+                    <div class="developer-links">
+                        <h3>Connect With Me</h3>
+                        <div class="links-grid">
+                            <a href="https://linkedin.com/in/yourprofile" target="_blank" class="link-card linkedin" rel="noopener noreferrer">
+                                <div class="link-icon">💼</div>
+                                <div class="link-content">
+                                    <h4>LinkedIn</h4>
+                                    <p>Connect professionally</p>
+                                </div>
+                                <div class="link-arrow">→</div>
+                            </a>
+
+                            <a href="https://github.com/yourusername" target="_blank" class="link-card github" rel="noopener noreferrer">
+                                <div class="link-icon">💻</div>
+                                <div class="link-content">
+                                    <h4>GitHub</h4>
+                                    <p>View my code repositories</p>
+                                </div>
+                                <div class="link-arrow">→</div>
+                            </a>
+
+                            <a href="mailto:your.email@example.com" class="link-card email">
+                                <div class="link-icon">📧</div>
+                                <div class="link-content">
+                                    <h4>Email</h4>
+                                    <p>your.email@example.com</p>
+                                </div>
+                                <div class="link-arrow">→</div>
+                            </a>
+
+                            <a href="https://twitter.com/yourusername" target="_blank" class="link-card twitter" rel="noopener noreferrer">
+                                <div class="link-icon">🐦</div>
+                                <div class="link-content">
+                                    <h4>Twitter</h4>
+                                    <p>Follow for updates</p>
+                                </div>
+                                <div class="link-arrow">→</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="developer-skills">
+                        <h3>Technical Skills</h3>
+                        <div class="skills-tags">
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Web Design</span>
+                            <span class="skill-tag">UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Content Writer Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Photo upload functionality
+        const photoUpload = document.getElementById('photoUpload');
+        const developerPhoto = document.getElementById('developerPhoto');
+        const developerImage = document.querySelector('.developer-image');
+        const imagePlaceholder = document.querySelector('.image-placeholder-text');
+
+        if (photoUpload && developerPhoto && developerImage) {
+            developerImage.addEventListener('click', () => {
+                photoUpload.click();
+            });
+
+            photoUpload.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        developerPhoto.src = event.target.result;
+                        developerPhoto.style.display = 'block';
+                        if (imagePlaceholder) {
+                            imagePlaceholder.style.display = 'none';
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
