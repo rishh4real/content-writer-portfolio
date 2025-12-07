@@ -32,7 +32,7 @@
     <section class="page-header">
         <div class="container">
             <h1>About the Developer</h1>
-            <p>Get to know the person behind this portfolio</p>
+            <p>Meet Shaurya Sharma - Developer & Content Creator</p>
         </div>
     </section>
 
@@ -43,8 +43,8 @@
                 <div class="developer-image-section">
                     <div class="developer-image-wrapper">
                         <div class="developer-image">
-                            <img src="" alt="Developer Photo" id="developerPhoto">
-                            <div class="image-placeholder-text">
+                            <img src="images/developer-photo.jpg" alt="Shaurya Sharma - Developer" id="developerPhoto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <div class="image-placeholder-text" style="display: none;">
                                 <p>Your Photo Here</p>
                                 <small>Click to upload or replace image</small>
                             </div>
@@ -56,36 +56,36 @@
                 <div class="developer-info">
                     <h2>About Me</h2>
                     <div class="about-me-content">
-                        <p>I'm a passionate developer and content creator who loves building beautiful, functional websites and crafting engaging content. With a keen eye for design and a passion for clean code, I bring creative ideas to life through modern web technologies.</p>
-                        <p>When I'm not coding or writing, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.</p>
+                        <p>Hi, I'm Shaurya Sharma, a passionate developer and content creator. I love building beautiful, functional websites and crafting engaging content that connects with audiences. With a keen eye for design and a passion for clean code, I bring creative ideas to life through modern web technologies.</p>
+                        <p>Currently working from home and studying at Newton School of Tech, I'm constantly exploring new technologies, contributing to projects, and expanding my skills in web development and content creation.</p>
                     </div>
 
                     <div class="developer-links">
                         <h3>Connect With Me</h3>
                         <div class="links-grid">
-                            <a href="https://linkedin.com/in/yourprofile" target="_blank" class="link-card linkedin" rel="noopener noreferrer">
+                            <a href="https://www.linkedin.com/in/shaurya-sharma-72ab8b376/" target="_blank" class="link-card linkedin" rel="noopener noreferrer">
                                 <div class="link-icon">💼</div>
                                 <div class="link-content">
                                     <h4>LinkedIn</h4>
-                                    <p>Connect professionally</p>
+                                    <p>Shaurya Sharma</p>
                                 </div>
                                 <div class="link-arrow">→</div>
                             </a>
 
-                            <a href="https://github.com/yourusername" target="_blank" class="link-card github" rel="noopener noreferrer">
+                            <a href="https://github.com/rishh4real" target="_blank" class="link-card github" rel="noopener noreferrer">
                                 <div class="link-icon">💻</div>
                                 <div class="link-content">
                                     <h4>GitHub</h4>
-                                    <p>View my code repositories</p>
+                                    <p>@rishh4real</p>
                                 </div>
                                 <div class="link-arrow">→</div>
                             </a>
 
-                            <a href="mailto:your.email@example.com" class="link-card email">
+                            <a href="mailto:rishh4work@gmail.com" class="link-card email">
                                 <div class="link-icon">📧</div>
                                 <div class="link-content">
                                     <h4>Email</h4>
-                                    <p>your.email@example.com</p>
+                                    <p>rishh4work@gmail.com</p>
                                 </div>
                                 <div class="link-arrow">→</div>
                             </a>
@@ -107,7 +107,7 @@
                             <span class="skill-tag">HTML5</span>
                             <span class="skill-tag">CSS3</span>
                             <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Python</span>
                             <span class="skill-tag">Node.js</span>
                             <span class="skill-tag">Git</span>
                             <span class="skill-tag">Web Design</span>
@@ -133,6 +133,31 @@
         const developerPhoto = document.getElementById('developerPhoto');
         const developerImage = document.querySelector('.developer-image');
         const imagePlaceholder = document.querySelector('.image-placeholder-text');
+
+        // Check if image loaded successfully
+        if (developerPhoto) {
+            developerPhoto.addEventListener('load', function() {
+                this.style.display = 'block';
+                if (imagePlaceholder) {
+                    imagePlaceholder.style.display = 'none';
+                }
+            });
+
+            developerPhoto.addEventListener('error', function() {
+                this.style.display = 'none';
+                if (imagePlaceholder) {
+                    imagePlaceholder.style.display = 'block';
+                }
+            });
+
+            // Check initial state
+            if (developerPhoto.complete && developerPhoto.naturalHeight !== 0) {
+                developerPhoto.style.display = 'block';
+                if (imagePlaceholder) {
+                    imagePlaceholder.style.display = 'none';
+                }
+            }
+        }
 
         if (photoUpload && developerPhoto && developerImage) {
             developerImage.addEventListener('click', () => {
