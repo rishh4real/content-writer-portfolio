@@ -46,10 +46,8 @@
                             <img src="images/developer-photo.jpg" alt="Shaurya Sharma - Developer" id="developerPhoto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <div class="image-placeholder-text" style="display: none;">
                                 <p>Your Photo Here</p>
-                                <small>Click to upload or replace image</small>
                             </div>
                         </div>
-                        <input type="file" id="photoUpload" accept="image/*" style="display: none;">
                     </div>
                 </div>
 
@@ -128,10 +126,8 @@
 
     <script src="script.js"></script>
     <script>
-        // Photo upload functionality
-        const photoUpload = document.getElementById('photoUpload');
+        // Image display functionality (no upload)
         const developerPhoto = document.getElementById('developerPhoto');
-        const developerImage = document.querySelector('.developer-image');
         const imagePlaceholder = document.querySelector('.image-placeholder-text');
 
         // Check if image loaded successfully
@@ -157,27 +153,6 @@
                     imagePlaceholder.style.display = 'none';
                 }
             }
-        }
-
-        if (photoUpload && developerPhoto && developerImage) {
-            developerImage.addEventListener('click', () => {
-                photoUpload.click();
-            });
-
-            photoUpload.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        developerPhoto.src = event.target.result;
-                        developerPhoto.style.display = 'block';
-                        if (imagePlaceholder) {
-                            imagePlaceholder.style.display = 'none';
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
         }
     </script>
 </body>
