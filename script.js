@@ -575,9 +575,267 @@ function startThemeCycle() {
     });
 }
 
+// Interactive Cursor System
+let cursor = document.getElementById('cursor');
+let cursorTrail = document.getElementById('cursorTrail');
+let mouseX = 0;
+let mouseY = 0;
+let trailX = 0;
+let trailY = 0;
+
+if (cursor && cursorTrail) {
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+    });
+
+    function animateTrail() {
+        trailX += (mouseX - trailX) * 0.1;
+        trailY += (mouseY - trailY) * 0.1;
+        
+        cursorTrail.style.left = trailX + 'px';
+        cursorTrail.style.top = trailY + 'px';
+        
+        requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+
+    const hoverElements = document.querySelectorAll('a, button, .btn, .feature-card, .portfolio-card, .link-card');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+}
+
+// Particle System
+const canvas = document.getElementById('particleCanvas');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const particleCount = 50;
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = Math.random() * 2 - 1;
+            this.speedY = Math.random() * 2 - 1;
+            this.opacity = Math.random() * 0.5 + 0.2;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
+
+        draw() {
+            const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+            ctx.fillStyle = accentColor;
+            ctx.globalAlpha = this.opacity;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+
+        particles.forEach((particle, i) => {
+            particles.slice(i + 1).forEach(otherParticle => {
+                const dx = particle.x - otherParticle.x;
+                const dy = particle.y - otherParticle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 100) {
+                    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+                    ctx.strokeStyle = accentColor;
+                    ctx.globalAlpha = (100 - distance) / 100 * 0.2;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particle.x, particle.y);
+                    ctx.lineTo(otherParticle.x, otherParticle.y);
+                    ctx.stroke();
+                    ctx.globalAlpha = 1;
+                }
+            });
+        });
+
+        requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
+
+// Magnetic Buttons
+function initMagneticButtons() {
+    const magneticElements = document.querySelectorAll('.btn-primary, .btn-secondary, .link-card, .feature-card');
+    
+    magneticElements.forEach(element => {
+        element.addEventListener('mousemove', function(e) {
+            const rect = element.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            const moveX = x * 0.3;
+            const moveY = y * 0.3;
+            
+            element.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            element.style.transform = 'translate(0, 0) scale(1)';
+        });
+    });
+}
+
+// 3D Card Tilt Effect
+function init3DCards() {
+    const cards = document.querySelectorAll('.feature-card, .portfolio-card, .skill-item');
+    
+    cards.forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+        });
+    });
+}
+
+// Advanced Text Animation with Glitch
+function initTextAnimations() {
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        const text = heroTitle.textContent;
+        heroTitle.innerHTML = '';
+        heroTitle.setAttribute('data-text', text);
+        
+        text.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.display = 'inline-block';
+            span.style.opacity = '0';
+            span.style.transform = 'translateY(50px) rotateX(90deg)';
+            span.style.transition = `all 0.5s ease ${index * 0.05}s`;
+            heroTitle.appendChild(span);
+            
+            setTimeout(() => {
+                span.style.opacity = '1';
+                span.style.transform = 'translateY(0) rotateX(0)';
+            }, 100);
+        });
+        
+        setTimeout(() => {
+            heroTitle.classList.add('glitch');
+        }, 2000);
+    }
+}
+
+// Scroll-triggered 3D effects
+function initScroll3DEffects() {
+    let ticking = false;
+    
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                
+                if (hero) {
+                    const heroContent = hero.querySelector('.hero-content');
+                    if (heroContent) {
+                        const rotateY = scrolled * 0.1;
+                        const rotateX = scrolled * 0.05;
+                        heroContent.style.transform = `perspective(1000px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(${scrolled * 0.5}px)`;
+                    }
+                }
+                
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+}
+
+// Floating elements animation
+function initFloatingElements() {
+    const floatingElements = document.querySelectorAll('.feature-card, .portfolio-card');
+    
+    floatingElements.forEach((element, index) => {
+        const delay = index * 0.2;
+        const duration = 3 + Math.random() * 2;
+        const amplitude = 10 + Math.random() * 10;
+        
+        element.style.animation = `float ${duration}s ease-in-out infinite ${delay}s`;
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% {
+                    transform: translateY(0px) rotate(0deg);
+                }
+                25% {
+                    transform: translateY(-${amplitude}px) rotate(1deg);
+                }
+                50% {
+                    transform: translateY(-${amplitude * 0.5}px) rotate(0deg);
+                }
+                75% {
+                    transform: translateY(-${amplitude}px) rotate(-1deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     applyTheme(colorThemes[0]);
     startThemeCycle();
+    initMagneticButtons();
+    init3DCards();
+    initTextAnimations();
+    initScroll3DEffects();
+    initFloatingElements();
     
     const hero = document.querySelector('.hero');
     if (hero) {
@@ -585,5 +843,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const randomTheme = colorThemes[Math.floor(Math.random() * colorThemes.length)];
             applyTheme(randomTheme);
         });
+    }
+    
+    // Disable cursor on mobile
+    if (window.innerWidth <= 768) {
+        document.documentElement.style.cursor = 'auto';
+        document.body.style.cursor = 'auto';
+        if (cursor) cursor.style.display = 'none';
+        if (cursorTrail) cursorTrail.style.display = 'none';
     }
 });
