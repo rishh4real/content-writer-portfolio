@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get in touch to discuss your content writing needs. Contact me for blog writing, copywriting, content strategy, and editing services.">
+    <meta name="keywords" content="contact content writer, hire content writer, content writing services, get in touch">
+    <meta name="author" content="Shaurya Sharma">
+    
+    <meta property="og:title" content="Contact | Content Writer Portfolio">
+    <meta property="og:description" content="Let's discuss your content needs">
+    <meta property="og:type" content="website">
+    
     <title>Contact | Content Writer Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,11 +28,11 @@
                 <li><a href="contact.html" class="active">Contact</a></li>
                 <li><a href="developer.html">Developer</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -80,24 +88,28 @@
 
                 <div class="contact-form-container">
                     <h2>Send a Message</h2>
-                    <form class="contact-form" id="contactForm">
+                    <form class="contact-form" id="contactForm" novalidate aria-label="Contact form">
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
+                            <label for="name">Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error" placeholder="Enter your full name">
+                            <span class="error-message" id="name-error" role="alert" aria-live="polite"></span>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-error" placeholder="your.email@example.com">
+                            <span class="error-message" id="email-error" role="alert" aria-live="polite"></span>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
+                            <label for="subject">Subject <span class="required">*</span></label>
+                            <input type="text" id="subject" name="subject" required aria-required="true" aria-describedby="subject-error" placeholder="What is this regarding?">
+                            <span class="error-message" id="subject-error" role="alert" aria-live="polite"></span>
                         </div>
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="6" required></textarea>
+                            <label for="message">Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="6" required aria-required="true" aria-describedby="message-error" placeholder="Tell me about your project or inquiry..."></textarea>
+                            <span class="error-message" id="message-error" role="alert" aria-live="polite"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary" aria-label="Submit contact form">Send Message</button>
                     </form>
                 </div>
             </div>

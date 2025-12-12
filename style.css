@@ -25,6 +25,22 @@ html {
     scroll-behavior: smooth;
 }
 
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-color);
+    color: var(--white);
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 10000;
+    border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -174,6 +190,10 @@ body::after {
     cursor: pointer;
     gap: 5px;
     z-index: 1001;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    margin: 0;
 }
 
 .hamburger span {
@@ -991,6 +1011,36 @@ body::after {
 
 .form-group textarea {
     resize: vertical;
+}
+
+.form-group input[aria-invalid="true"],
+.form-group textarea[aria-invalid="true"] {
+    border-color: #ff6b6b;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+}
+
+.form-group .required {
+    color: #ff6b6b;
+    margin-left: 4px;
+}
+
+.error-message {
+    display: none;
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    padding-left: 5px;
+    animation: fadeIn 0.3s ease;
+}
+
+.error-message[role="alert"] {
+    font-weight: 500;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+    opacity: 1;
 }
 
 /* Footer */

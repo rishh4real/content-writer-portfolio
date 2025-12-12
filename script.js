@@ -20,9 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
+            const isActive = navMenu.classList.contains('active');
             navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            hamburger.setAttribute('aria-expanded', !isActive);
+            document.body.style.overflow = !isActive ? 'hidden' : '';
         });
 
         const navLinks = document.querySelectorAll('.nav-menu a');
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function() {
                 navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             });
         });
@@ -41,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }
         });
@@ -80,15 +84,143 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const subjectInput = document.getElementById('subject');
+        const messageInput = document.getElementById('message');
+
+        function validateName(name) {
+            if (!name.trim()) {
+                return 'Name is required';
+            }
+            if (name.trim().length < 2) {
+                return 'Name must be at least 2 characters';
+            }
+            return '';
+        }
+
+        function validateEmail(email) {
+            if (!email.trim()) {
+                return 'Email is required';
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return 'Please enter a valid email address';
+            }
+            return '';
+        }
+
+        function validateSubject(subject) {
+            if (!subject.trim()) {
+                return 'Subject is required';
+            }
+            if (subject.trim().length < 3) {
+                return 'Subject must be at least 3 characters';
+            }
+            return '';
+        }
+
+        function validateMessage(message) {
+            if (!message.trim()) {
+                return 'Message is required';
+            }
+            if (message.trim().length < 10) {
+                return 'Message must be at least 10 characters';
+            }
+            return '';
+        }
+
+        function showError(input, errorId, message) {
+            const errorElement = document.getElementById(errorId);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = message ? 'block' : 'none';
+            }
+            if (message) {
+                input.setAttribute('aria-invalid', 'true');
+                input.style.borderColor = '#ff6b6b';
+            } else {
+                input.setAttribute('aria-invalid', 'false');
+                input.style.borderColor = '';
+            }
+        }
+
+        function clearErrors() {
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(error => {
+                error.textContent = '';
+                error.style.display = 'none';
+            });
+            [nameInput, emailInput, subjectInput, messageInput].forEach(input => {
+                if (input) {
+                    input.setAttribute('aria-invalid', 'false');
+                    input.style.borderColor = '';
+                }
+            });
+        }
+
+        if (nameInput) {
+            nameInput.addEventListener('blur', function() {
+                const error = validateName(this.value);
+                showError(this, 'name-error', error);
+            });
+        }
+
+        if (emailInput) {
+            emailInput.addEventListener('blur', function() {
+                const error = validateEmail(this.value);
+                showError(this, 'email-error', error);
+            });
+        }
+
+        if (subjectInput) {
+            subjectInput.addEventListener('blur', function() {
+                const error = validateSubject(this.value);
+                showError(this, 'subject-error', error);
+            });
+        }
+
+        if (messageInput) {
+            messageInput.addEventListener('blur', function() {
+                const error = validateMessage(this.value);
+                showError(this, 'message-error', error);
+            });
+        }
+
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            clearErrors();
             
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
+            const name = nameInput ? nameInput.value : '';
+            const email = emailInput ? emailInput.value : '';
+            const subject = subjectInput ? subjectInput.value : '';
+            const message = messageInput ? messageInput.value : '';
 
-            if (name && email && subject && message) {
+            const nameError = validateName(name);
+            const emailError = validateEmail(email);
+            const subjectError = validateSubject(subject);
+            const messageError = validateMessage(message);
+
+            let hasErrors = false;
+
+            if (nameError) {
+                showError(nameInput, 'name-error', nameError);
+                hasErrors = true;
+            }
+            if (emailError) {
+                showError(emailInput, 'email-error', emailError);
+                hasErrors = true;
+            }
+            if (subjectError) {
+                showError(subjectInput, 'subject-error', subjectError);
+                hasErrors = true;
+            }
+            if (messageError) {
+                showError(messageInput, 'message-error', messageError);
+                hasErrors = true;
+            }
+
+            if (!hasErrors) {
                 const submitBtn = contactForm.querySelector('button[type="submit"]');
                 const originalText = submitBtn.textContent;
                 submitBtn.textContent = 'Sending...';
@@ -101,6 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     setTimeout(() => {
                         contactForm.reset();
+                        clearErrors();
                         submitBtn.textContent = originalText;
                         submitBtn.style.background = '';
                         submitBtn.style.opacity = '1';
