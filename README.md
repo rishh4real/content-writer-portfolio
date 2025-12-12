@@ -2,6 +2,10 @@
 
 A modern, responsive portfolio website showcasing content writing services and portfolio pieces. Built with pure HTML, CSS, and JavaScript, featuring smooth animations, interactive elements, and a clean, professional design.
 
+## 🔗 Live Demo
+
+**👉 [View Live Website](https://rishh4real.github.io/content-writer-portfolio/)**
+
 ## 🌟 Features
 
 - **Responsive Design**: Fully responsive layout that works seamlessly on desktop, tablet, and mobile devices
@@ -157,7 +161,8 @@ This project is open source and available under the [MIT License](LICENSE).
 **Shaurya Sharma**
 
 - GitHub: [@rishh4real](https://github.com/rishh4real)
-- Portfolio: [Content Writer Portfolio](https://github.com/rishh4real/content-writer-portfolio)
+- Live Demo: [https://rishh4real.github.io/content-writer-portfolio/](https://rishh4real.github.io/content-writer-portfolio/)
+- Portfolio Repository: [Content Writer Portfolio](https://github.com/rishh4real/content-writer-portfolio)
 
 ## 🙏 Acknowledgments
 
