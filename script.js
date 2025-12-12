@@ -1,10 +1,8 @@
-// Mobile Navigation Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     const navbar = document.querySelector('.navbar');
 
-    // Navbar scroll effect
     let lastScroll = 0;
     window.addEventListener('scroll', function() {
         const currentScroll = window.pageYOffset;
@@ -27,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
         });
 
-        // Close menu when clicking on a link
         const navLinks = document.querySelectorAll('.nav-menu a');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
@@ -37,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const isClickInsideNav = navMenu.contains(event.target);
             const isClickOnHamburger = hamburger.contains(event.target);
@@ -50,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Portfolio Filter Functionality with smooth animations
     const filterButtons = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
 
@@ -83,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Contact Form Submission with animation
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -95,14 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const message = document.getElementById('message').value;
 
             if (name && email && subject && message) {
-                // Animate button
                 const submitBtn = contactForm.querySelector('button[type="submit"]');
                 const originalText = submitBtn.textContent;
                 submitBtn.textContent = 'Sending...';
                 submitBtn.style.opacity = '0.7';
                 submitBtn.disabled = true;
 
-                // Simulate sending (replace with actual API call)
                 setTimeout(() => {
                     submitBtn.textContent = 'Message Sent! ✓';
                     submitBtn.style.background = 'linear-gradient(135deg, #4caf50 0%, #45a049 100%)';
@@ -116,7 +108,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }, 2000);
                 }, 1500);
             } else {
-                // Shake animation for error
                 contactForm.style.animation = 'shake 0.5s';
                 setTimeout(() => {
                     contactForm.style.animation = '';
@@ -125,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
@@ -143,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Advanced Scroll Animations with Intersection Observer
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
@@ -158,25 +147,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Observe section titles
     const sectionTitles = document.querySelectorAll('.section-title');
     sectionTitles.forEach(title => {
         observer.observe(title);
     });
 
-    // Observe feature cards with stagger
     const featureCards = document.querySelectorAll('.feature-card');
     featureCards.forEach((card, index) => {
         observer.observe(card);
     });
 
-    // Observe portfolio cards
     const portfolioCards = document.querySelectorAll('.portfolio-card');
     portfolioCards.forEach(card => {
         observer.observe(card);
     });
 
-    // Observe skill items
     const skillItems = document.querySelectorAll('.skill-item');
     skillItems.forEach((item, index) => {
         setTimeout(() => {
@@ -184,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, index * 100);
     });
 
-    // Parallax Effect for Hero Section
     const hero = document.querySelector('.hero');
     if (hero) {
         window.addEventListener('scroll', function() {
@@ -197,7 +181,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Parallax for page headers
     const pageHeaders = document.querySelectorAll('.page-header');
     pageHeaders.forEach(header => {
         window.addEventListener('scroll', function() {
@@ -210,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Mouse move parallax effect for cards
     const cards = document.querySelectorAll('.feature-card, .portfolio-card, .skill-item');
     cards.forEach(card => {
         card.addEventListener('mousemove', function(e) {
@@ -232,7 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Typing effect for hero title (optional enhancement)
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle && window.innerWidth > 768) {
         const text = heroTitle.textContent;
@@ -248,11 +229,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
         
-        // Start typing after a short delay
         setTimeout(typeWriter, 500);
     }
 
-    // Add glow effect on scroll for accent elements
     window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
         const buttons = document.querySelectorAll('.btn-primary');
@@ -267,7 +246,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Add CSS animations dynamically
 const style = document.createElement('style');
 style.textContent = `
     @keyframes fadeIn {
@@ -295,13 +273,11 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Page transition effect
 window.addEventListener('beforeunload', function() {
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.3s';
 });
 
-// Add loading animation
 window.addEventListener('load', function() {
     document.body.style.opacity = '0';
     setTimeout(() => {
