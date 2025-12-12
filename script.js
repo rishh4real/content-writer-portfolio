@@ -727,32 +727,27 @@ function init3DCards() {
     });
 }
 
-// Advanced Text Animation with Glitch
+// Advanced Text Animation
 function initTextAnimations() {
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
         const text = heroTitle.textContent;
         heroTitle.innerHTML = '';
-        heroTitle.setAttribute('data-text', text);
         
         text.split('').forEach((char, index) => {
             const span = document.createElement('span');
             span.textContent = char === ' ' ? '\u00A0' : char;
             span.style.display = 'inline-block';
             span.style.opacity = '0';
-            span.style.transform = 'translateY(50px) rotateX(90deg)';
-            span.style.transition = `all 0.5s ease ${index * 0.05}s`;
+            span.style.transform = 'translateY(30px)';
+            span.style.transition = `all 0.6s ease ${index * 0.03}s`;
             heroTitle.appendChild(span);
             
             setTimeout(() => {
                 span.style.opacity = '1';
-                span.style.transform = 'translateY(0) rotateX(0)';
+                span.style.transform = 'translateY(0)';
             }, 100);
         });
-        
-        setTimeout(() => {
-            heroTitle.classList.add('glitch');
-        }, 2000);
     }
 }
 
