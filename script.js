@@ -599,12 +599,13 @@ if (cursor && cursorTrail) {
 // Particle System
 const canvas = document.getElementById('particleCanvas');
 if (canvas) {
+    const isMobile = window.innerWidth <= 768;
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
     const particles = [];
-    const particleCount = 30;
+    const particleCount = isMobile ? 10 : 30;
 
     class Particle {
         constructor() {
@@ -641,38 +642,50 @@ if (canvas) {
         particles.push(new Particle());
     }
 
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        particles.forEach(particle => {
-            particle.update();
-            particle.draw();
-        });
+    let animationFrameId;
+    let lastTime = 0;
+    const targetFPS = isMobile ? 30 : 60;
+    const frameInterval = 1000 / targetFPS;
 
-        particles.forEach((particle, i) => {
-            particles.slice(i + 1).forEach(otherParticle => {
-                const dx = particle.x - otherParticle.x;
-                const dy = particle.y - otherParticle.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 80) {
-                    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
-                    ctx.strokeStyle = accentColor;
-                    ctx.globalAlpha = (80 - distance) / 80 * 0.1;
-                    ctx.lineWidth = 0.5;
-                    ctx.beginPath();
-                    ctx.moveTo(particle.x, particle.y);
-                    ctx.lineTo(otherParticle.x, otherParticle.y);
-                    ctx.stroke();
-                    ctx.globalAlpha = 1;
-                }
+    function animateParticles(currentTime) {
+        if (currentTime - lastTime >= frameInterval) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
             });
-        });
 
-        requestAnimationFrame(animateParticles);
+            // Disable particle connections on mobile for better performance
+            if (!isMobile) {
+                particles.forEach((particle, i) => {
+                    particles.slice(i + 1).forEach(otherParticle => {
+                        const dx = particle.x - otherParticle.x;
+                        const dy = particle.y - otherParticle.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 80) {
+                            const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+                            ctx.strokeStyle = accentColor;
+                            ctx.globalAlpha = (80 - distance) / 80 * 0.1;
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(particle.x, particle.y);
+                            ctx.lineTo(otherParticle.x, otherParticle.y);
+                            ctx.stroke();
+                            ctx.globalAlpha = 1;
+                        }
+                    });
+                });
+            }
+
+            lastTime = currentTime;
+        }
+
+        animationFrameId = requestAnimationFrame(animateParticles);
     }
 
-    animateParticles();
+    animateParticles(0);
 
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
@@ -680,8 +693,10 @@ if (canvas) {
     });
 }
 
-// Magnetic Buttons
+// Magnetic Buttons (disabled on mobile)
 function initMagneticButtons() {
+    if (window.innerWidth <= 768) return; // Disable on mobile
+    
     const magneticElements = document.querySelectorAll('.btn-primary, .btn-secondary, .link-card, .feature-card');
     
     magneticElements.forEach(element => {
@@ -702,8 +717,10 @@ function initMagneticButtons() {
     });
 }
 
-// 3D Card Tilt Effect
+// 3D Card Tilt Effect (disabled on mobile)
 function init3DCards() {
+    if (window.innerWidth <= 768) return; // Disable on mobile
+    
     const cards = document.querySelectorAll('.feature-card, .portfolio-card, .skill-item');
     
     cards.forEach(card => {
@@ -751,8 +768,10 @@ function initTextAnimations() {
     }
 }
 
-// Scroll-triggered 3D effects
+// Scroll-triggered 3D effects (disabled on mobile)
 function initScroll3DEffects() {
+    if (window.innerWidth <= 768) return; // Disable on mobile
+    
     let ticking = false;
     
     window.addEventListener('scroll', () => {
@@ -777,9 +796,15 @@ function initScroll3DEffects() {
     });
 }
 
-// Floating elements animation
+// Floating elements animation (simplified on mobile)
 function initFloatingElements() {
+    const isMobile = window.innerWidth <= 768;
     const floatingElements = document.querySelectorAll('.feature-card, .portfolio-card');
+    
+    if (isMobile) {
+        // Disable floating on mobile for better performance
+        return;
+    }
     
     floatingElements.forEach((element, index) => {
         const delay = index * 0.2;

@@ -1586,8 +1586,36 @@ body::after {
         display: none !important;
     }
     
+    #particleCanvas {
+        opacity: 0.2 !important;
+    }
+    
     .hamburger {
         display: flex;
+    }
+    
+    * {
+        will-change: auto !important;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+    }
+    
+    .hero-content {
+        animation: none !important;
+        transform: none !important;
+    }
+    
+    .feature-card,
+    .portfolio-card,
+    .skill-item {
+        animation: none !important;
+        transform: none !important;
+    }
+    
+    .hero-title span {
+        animation: none !important;
+        transition: none !important;
     }
 
     .nav-menu {
