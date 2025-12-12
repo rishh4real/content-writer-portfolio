@@ -1199,30 +1199,45 @@ body::after {
     left: 100%;
 }
 
-.link-card:hover {
+.link-card:hover,
+.link-card:focus,
+.link-card:focus-visible {
     transform: translateX(10px) translateY(-5px);
     border-color: var(--accent-color);
     box-shadow: 0 15px 40px rgba(255, 107, 107, 0.3);
+    outline: none;
 }
 
-.link-card.linkedin:hover {
+.link-card.linkedin:hover,
+.link-card.linkedin:focus,
+.link-card.linkedin:focus-visible {
     border-color: #0077b5;
     box-shadow: 0 15px 40px rgba(0, 119, 181, 0.3);
+    outline: none;
 }
 
-.link-card.github:hover {
+.link-card.github:hover,
+.link-card.github:focus,
+.link-card.github:focus-visible {
     border-color: #333;
     box-shadow: 0 15px 40px rgba(51, 51, 51, 0.3);
+    outline: none;
 }
 
-.link-card.email:hover {
+.link-card.email:hover,
+.link-card.email:focus,
+.link-card.email:focus-visible {
     border-color: #ea4335;
     box-shadow: 0 15px 40px rgba(234, 67, 53, 0.3);
+    outline: none;
 }
 
-.link-card.instagram:hover {
+.link-card.instagram:hover,
+.link-card.instagram:focus,
+.link-card.instagram:focus-visible {
     border-color: #E4405F;
     box-shadow: 0 15px 40px rgba(228, 64, 95, 0.3);
+    outline: none;
 }
 
 .link-icon {
@@ -1462,24 +1477,39 @@ body::after {
     }
     
     /* Enhance link cards */
-    .link-card:hover {
+    .link-card:hover,
+    .link-card:focus,
+    .link-card:focus-visible {
         box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        outline: none;
     }
     
-    .link-card.linkedin:hover {
+    .link-card.linkedin:hover,
+    .link-card.linkedin:focus,
+    .link-card.linkedin:focus-visible {
         box-shadow: 0 15px 40px rgba(0, 119, 181, 0.4);
+        outline: none;
     }
     
-    .link-card.github:hover {
+    .link-card.github:hover,
+    .link-card.github:focus,
+    .link-card.github:focus-visible {
         box-shadow: 0 15px 40px rgba(51, 51, 51, 0.4);
+        outline: none;
     }
     
-    .link-card.email:hover {
+    .link-card.email:hover,
+    .link-card.email:focus,
+    .link-card.email:focus-visible {
         box-shadow: 0 15px 40px rgba(234, 67, 53, 0.4);
+        outline: none;
     }
     
-    .link-card.instagram:hover {
+    .link-card.instagram:hover,
+    .link-card.instagram:focus,
+    .link-card.instagram:focus-visible {
         box-shadow: 0 15px 40px rgba(228, 64, 95, 0.4);
+        outline: none;
     }
     
     /* Enhance filter buttons */
