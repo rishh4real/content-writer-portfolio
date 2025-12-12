@@ -618,7 +618,7 @@ if (canvas) {
     canvas.height = window.innerHeight;
 
     const particles = [];
-    const particleCount = 50;
+    const particleCount = 30;
 
     class Particle {
         constructor() {
@@ -643,7 +643,7 @@ if (canvas) {
         draw() {
             const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
             ctx.fillStyle = accentColor;
-            ctx.globalAlpha = this.opacity;
+            ctx.globalAlpha = this.opacity * 0.5;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
@@ -669,11 +669,11 @@ if (canvas) {
                 const dy = particle.y - otherParticle.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < 100) {
+                if (distance < 80) {
                     const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
                     ctx.strokeStyle = accentColor;
-                    ctx.globalAlpha = (100 - distance) / 100 * 0.2;
-                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = (80 - distance) / 80 * 0.1;
+                    ctx.lineWidth = 0.5;
                     ctx.beginPath();
                     ctx.moveTo(particle.x, particle.y);
                     ctx.lineTo(otherParticle.x, otherParticle.y);
