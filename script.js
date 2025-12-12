@@ -557,22 +557,8 @@ function changeTheme() {
 }
 
 function startThemeCycle() {
-    const cycleTime = 4000;
-    
-    themeChangeInterval = setInterval(changeTheme, cycleTime);
-    
-    let scrollCount = 0;
-    const scrollThreshold = 500;
-    
-    window.addEventListener('scroll', function() {
-        scrollCount += Math.abs(window.scrollY - (window.lastScrollY || 0));
-        window.lastScrollY = window.scrollY;
-        
-        if (scrollCount >= scrollThreshold) {
-            changeTheme();
-            scrollCount = 0;
-        }
-    });
+    // Color cycling disabled - keeping original orange theme
+    // themeChangeInterval = setInterval(changeTheme, cycleTime);
 }
 
 // Interactive Cursor System
@@ -829,6 +815,7 @@ function initFloatingElements() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Apply only the original orange theme
     applyTheme(colorThemes[0]);
     startThemeCycle();
     initMagneticButtons();
@@ -836,14 +823,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initTextAnimations();
     initScroll3DEffects();
     initFloatingElements();
-    
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.addEventListener('mouseenter', function() {
-            const randomTheme = colorThemes[Math.floor(Math.random() * colorThemes.length)];
-            applyTheme(randomTheme);
-        });
-    }
     
     // Disable cursor on mobile
     if (window.innerWidth <= 768) {
