@@ -35,3 +35,5 @@ If you want a simpler solution, you can use:
 - **GoatCounter** (free, privacy-friendly): https://goatcounter.com/
 - **Plausible Analytics** (paid, privacy-focused)
 - **Cloudflare Web Analytics** (free): https://www.cloudflare.com/web-analytics/
+
+

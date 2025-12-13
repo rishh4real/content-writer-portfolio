@@ -542,7 +542,19 @@ function applyTheme(theme) {
     
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
-        heroTitle.style.background = `linear-gradient(135deg, #ffffff 0%, ${theme.accent} 50%, #ffffff 100%)`;
+        heroTitle.style.background = 'none';
+        heroTitle.style.backgroundImage = 'none';
+        heroTitle.style.color = '#ffffff';
+        heroTitle.style.webkitTextFillColor = '#ffffff';
+        heroTitle.style.backgroundClip = 'unset';
+        heroTitle.style.webkitBackgroundClip = 'unset';
+    }
+    
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        heroContent.style.background = 'none';
+        heroContent.style.backgroundImage = 'none';
+        heroContent.style.boxShadow = 'none';
     }
     
     const navLinks = document.querySelectorAll('.nav-menu a:hover, .nav-menu a.active');
