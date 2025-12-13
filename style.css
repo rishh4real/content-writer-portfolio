@@ -369,10 +369,10 @@ body::after {
     margin: 0 auto;
     animation: heroFadeIn 1.5s ease-out;
     padding: 2rem;
-    background: rgba(10, 10, 10, 0.3);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    border: none;
 }
 
 @keyframes heroFadeIn {
